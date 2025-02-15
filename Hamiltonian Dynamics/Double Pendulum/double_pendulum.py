@@ -6,7 +6,6 @@ from matplotlib import pyplot as plt
 from matplotlib import animation as plt_animation
 import numpy as np
 from jax import config as jax_config
-import shutil
 
 from tqdm import tqdm
 import os
@@ -133,83 +132,74 @@ def visalize_dataset(
 
 
 if __name__ == '__main__':
-    import argparse
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset', type=str, default='mass_spring')
-    parser.add_argument('--class_id', type=int, default=0)
-    args = parser.parse_args()
-
     # Dataset parameters
+    class_id = 0
     print("=> Generating datasets....")
-    for dataset, class_id in zip(["pendulum_2g", "pendulum_3g", "pendulum_4g"], [0, 1, 2]):
-        num_steps = 30
-        dt = 0.1
-        steps_per_dt = 1
 
-        num_train = 3000
-        num_val = 1000
-        num_test = 1000
-        num_total = num_train + num_val + num_test
+    num_steps = 30
+    dt = 0.1
+    steps_per_dt = 1
 
-        # Generate dataset
-        overwrite = True
-        datasets.generate_full_dataset(
-            folder='pendulum3/',
-            dataset=dataset,
-            dt=dt,
-            num_steps=num_steps,
-            steps_per_dt=steps_per_dt,
-            num_train=num_total,
-            num_test=num_test,
-            overwrite=overwrite,
-        )
+    num_train = 10000
+    num_val = 3000
+    num_test = 3000
+    num_total = num_train + num_val + num_test
 
-        """ Data Generation """
-        dataset_path = f'pendulum3/{dataset}/'
-        
-        print("=> Converting training files...")
-        loaded_dataset = load_datasets.load_dataset(
-            path=dataset_path,
-            tfrecord_prefix="train",
-            sub_sample_length=num_steps,
-            per_device_batch_size=1,
-            num_epochs=1,
-            drop_remainder=False
-        )
+    # Generate dataset
+    overwrite = True
+    datasets.generate_full_dataset(
+        folder='./',
+        dataset='double_pendulum',
+        dt=dt,
+        num_steps=num_steps,
+        steps_per_dt=steps_per_dt,
+        num_train=num_total,
+        num_test=num_test,
+        overwrite=overwrite,
+    )
 
-        print(loaded_dataset)
+    """ Data Generation """
+    dataset_path = 'double_pendulum/'
+    
+    print("=> Converting training files...")
+    loaded_dataset = load_datasets.load_dataset(
+        path=dataset_path,
+        tfrecord_prefix="train",
+        sub_sample_length=num_steps,
+        per_device_batch_size=1,
+        num_epochs=1,
+        drop_remainder=False
+    )
 
-        images = []
-        states = []
-        for idx, sample in tqdm(enumerate(loaded_dataset)):
-            image = sample['image'].numpy()
-            print(image.shape)
+    print(loaded_dataset)
 
-            # (32, 32, 3) -> (3, 32, 32)
-            image = np.swapaxes(image, 3, 4)
-            image = np.swapaxes(image, 2, 3)
+    images = []
+    states = []
+    for idx, sample in tqdm(enumerate(loaded_dataset)):
+        image = sample['image'].numpy()
+        print(image.shape)
 
-            # Append to stack
-            images.append(image)
-            states.append(sample['x'].numpy())
+        # (32, 32, 3) -> (3, 32, 32)
+        image = np.swapaxes(image, 3, 4)
+        image = np.swapaxes(image, 2, 3)
 
-        images = np.vstack(images)
-        states = np.vstack(states)
-        labels = np.full([images.shape[0], 1], fill_value=args.class_id)
-        print(images.shape)
+        # Append to stack
+        images.append(image)
+        states.append(sample['x'].numpy())
 
-        # Bernoullize the dynamics to foreground and background
-        images = (images > 0.45).astype(float)
+    images = np.vstack(images)
+    states = np.vstack(states)
+    labels = np.full([images.shape[0], 1], fill_value=0)
+    print(images.shape)
 
-        # Split and save into groups
-        if not os.path.exists(f"pendulum3/pendulum_{class_id}/"):
-            os.mkdir(f"pendulum3/pendulum_{class_id}/")
-            
-        np.savez(f"pendulum3/pendulum_{class_id}/train.npz", image=images[:num_train], state=states[:num_train], label=labels[:num_train])
-        np.savez(f"pendulum3/pendulum_{class_id}/val.npz", image=images[num_train:num_train + num_val], state=states[num_train:num_train + num_val], label=labels[num_train:num_train + num_val])
-        np.savez(f"pendulum3/pendulum_{class_id}/test.npz", image=images[num_train + num_val:], state=states[num_train + num_val:], label=labels[num_train + num_val:])
-        shutil.rmtree(f"pendulum3/{dataset}/")
+    # Bernoullize the dynamics to foreground and background
+    images = (images > 0.45).astype(float)
 
-        print(images[:num_train].shape, images[num_train:num_train + num_val].shape, images[num_train + num_val:].shape)
-        print(states[:num_train].shape, states[num_train:num_train + num_val].shape, states[num_train + num_val:].shape)
-        print(labels[:num_train].shape, labels[num_train:num_train + num_val].shape, labels[num_train + num_val:].shape)
+    # Split and save into groups
+    np.savez(f"{dataset_path}/train.npz", image=images[:num_train], state=states[:num_train], label=labels[:num_train])
+    np.savez(f"{dataset_path}/val.npz", image=images[num_train:num_train + num_val], state=states[num_train:num_train + num_val], label=labels[num_train:num_train + num_val])
+    np.savez(f"{dataset_path}/test.npz", image=images[num_train + num_val:], state=states[num_train + num_val:], label=labels[num_train + num_val:])
+
+    print(images[:num_train].shape, images[num_train:num_train + num_val].shape, images[num_train + num_val:].shape)
+    print(states[:num_train].shape, states[num_train:num_train + num_val].shape, states[num_train + num_val:].shape)
+    print(labels[:num_train].shape, labels[num_train:num_train + num_val].shape, labels[num_train + num_val:].shape)

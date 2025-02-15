@@ -114,7 +114,7 @@ if __name__ == '__main__':
     train_per_grav = 10000
     val_per_grav = 2000
     test_per_grav = 2000
-    num_timesteps = 20
+    num_timesteps = 30
     total_size = train_per_grav + val_per_grav + test_per_grav
 
     # Velocity limits
