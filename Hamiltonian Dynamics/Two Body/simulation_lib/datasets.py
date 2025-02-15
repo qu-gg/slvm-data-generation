@@ -501,10 +501,10 @@ DOUBLE_PENDULUM_COLORS_FRICTION = (
 TWO_BODY = (
     n_body.TwoBodySystem,
     lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(1.0, 1.0),
+        m_range=utils.BoxRegion(0.5, 1.5),
         g_range=utils.BoxRegion(1.0, 1.0),
         radius_range=utils.BoxRegion(0.5, 1.5),
-        provided_canvas_bounds=utils.BoxRegion(-2.75, 2.75),
+        provided_canvas_bounds=utils.BoxRegion(-5.0, 5.0),
         randomize_canvas_location=False,
         num_colors=2,
     )

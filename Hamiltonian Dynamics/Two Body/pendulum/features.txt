@@ -1,0 +1,8 @@
+dx_dt, (31, 2), float64
+image, (31, 32, 32, 3), uint8
+other/color_index, (1, 1), int64
+other/g, (1,), float64
+other/l, (1,), float64
+other/m, (1,), float64
+other/offset, (1, 2), float64
+x, (31, 2), float64

@@ -462,9 +462,9 @@ PENDULUM_COLORS_FRICTION = (
 DOUBLE_PENDULUM = (
     ideal_double_pendulum.IdealDoublePendulum,
     lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(0.5, 0.5),
+        m_range=utils.BoxRegion(0.4, 0.6),
         g_range=utils.BoxRegion(3.0, 3.0),
-        l_range=utils.BoxRegion(1.0, 1.0),
+        l_range=utils.BoxRegion(0.75, 1.0),
         radius_range=utils.BoxRegion(1.3, 2.3),
         uniform_annulus=False,
         randomize_canvas_location=False,
