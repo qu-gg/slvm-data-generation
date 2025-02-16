@@ -1,6 +1,15 @@
 # slvm-data-generation
 ### Description
-Personal convenience repository to hold data generation scripts for all of my PhD works. Lot of this will be uncredited and is not to be presented as my own work, just <i>my</i> modifications for my works. As well, there is not an effort to make the code reuseable between datasets or sophisticated. The goal here is to have isolated, dedicated scripts to go to a dataset and run it as when I had ran it before.
+Personal convenience repository to hold data generation scripts for all of my PhD works. This is not presented as my own purely original work, just <i>my</i> modifications for datasets used my works. As well, there is not an effort to make the code reuseable between datasets or sophisticated. The goal here is to have isolated, dedicated scripts to go to a dataset and run it as when I had ran it before.
+
+### Credit
+<ul>
+<li> <b>Bouncing Ball</b> and <b>Bouncing Ball [Gravity]</b>: Sourced from the <a href="https://github.com/simonkamronn/kvae">KVAE</a> repo.
+<li> <b>Double Pendulum</b>, <b>Mass Spring</b>, <b>Pendulum</b>, <b>Two Body</b>: Sourced from the <a href="https://github.com/google-deepmind/dm_hamiltonian_dynamics_suite/tree/master?tab=readme-ov-file">DM Hamiltonian Suite</a>.
+<li> <b>NASCAR</b>: Sourced from <a href="https://github.com/slinderman/recurrent-slds">R-SLDS</a>.
+<li> <b>Lorenz</b> and <b>Double Pendulum</b>: Sourced from <a href="https://github.com/ostadabbas/DSARF/tree/master/">DSARF</a>.
+</ul>
+
 
 ### Data Generation Conventions
 To run a single-dynamic dataset (e.g., one single gravvity affecting a bouncing ball), in each data folder, run <code>python3 name_of_dataset.py</code>. This will generate a dedicated output folder with the same dataset name containing 3 .npz files - train, val, test. These contain images sequences and ground-truth states (if they exist/are known for a system).
