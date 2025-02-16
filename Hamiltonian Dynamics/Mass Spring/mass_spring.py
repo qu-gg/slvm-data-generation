@@ -149,7 +149,7 @@ if __name__ == '__main__':
     overwrite = True
     datasets.generate_full_dataset(
         folder='./',
-        dataset='pendulum',
+        dataset='mass_spring',
         dt=dt,
         num_steps=num_steps,
         steps_per_dt=steps_per_dt,
@@ -159,7 +159,7 @@ if __name__ == '__main__':
     )
 
     """ Data Generation """
-    dataset_path = 'pendulum/'
+    dataset_path = 'mass_spring/'
     
     print("=> Converting training files...")
     loaded_dataset = load_datasets.load_dataset(

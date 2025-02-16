@@ -141,7 +141,7 @@ if __name__ == '__main__':
 
     # Dataset parameters
     print("=> Generating datasets....")
-    for dataset, class_id in zip(["pendulum_2g", "pendulum_3g", "pendulum_4g"], [0, 1, 2]):
+    for dataset, class_id in zip(["mass_spring_2g", "mass_spring_3g", "mass_spring_4g"], [0, 1, 2]):
         num_steps = 30
         dt = 0.1
         steps_per_dt = 1
@@ -154,7 +154,7 @@ if __name__ == '__main__':
         # Generate dataset
         overwrite = True
         datasets.generate_full_dataset(
-            folder='pendulum3/',
+            folder='mass_spring3/',
             dataset=dataset,
             dt=dt,
             num_steps=num_steps,
@@ -165,7 +165,7 @@ if __name__ == '__main__':
         )
 
         """ Data Generation """
-        dataset_path = f'pendulum3/{dataset}/'
+        dataset_path = f'mass_spring3/{dataset}/'
         
         print("=> Converting training files...")
         loaded_dataset = load_datasets.load_dataset(
@@ -202,13 +202,13 @@ if __name__ == '__main__':
         images = (images > 0.45).astype(float)
 
         # Split and save into groups
-        if not os.path.exists(f"pendulum3/pendulum_{class_id}/"):
-            os.mkdir(f"pendulum3/pendulum_{class_id}/")
+        if not os.path.exists(f"mass_spring3/mass_spring_{class_id}/"):
+            os.mkdir(f"mass_spring3/mass_spring_{class_id}/")
             
-        np.savez(f"pendulum3/pendulum_{class_id}/train.npz", image=images[:num_train], state=states[:num_train], label=labels[:num_train])
-        np.savez(f"pendulum3/pendulum_{class_id}/val.npz", image=images[num_train:num_train + num_val], state=states[num_train:num_train + num_val], label=labels[num_train:num_train + num_val])
-        np.savez(f"pendulum3/pendulum_{class_id}/test.npz", image=images[num_train + num_val:], state=states[num_train + num_val:], label=labels[num_train + num_val:])
-        shutil.rmtree(f"pendulum3/{dataset}/")
+        np.savez(f"mass_spring3/mass_spring_{class_id}/train.npz", image=images[:num_train], state=states[:num_train], label=labels[:num_train])
+        np.savez(f"mass_spring3/mass_spring_{class_id}/val.npz", image=images[num_train:num_train + num_val], state=states[num_train:num_train + num_val], label=labels[num_train:num_train + num_val])
+        np.savez(f"mass_spring3/mass_spring_{class_id}/test.npz", image=images[num_train + num_val:], state=states[num_train + num_val:], label=labels[num_train + num_val:])
+        shutil.rmtree(f"mass_spring3/{dataset}/")
 
         print(images[:num_train].shape, images[num_train:num_train + num_val].shape, images[num_train + num_val:].shape)
         print(states[:num_train].shape, states[num_train:num_train + num_val].shape, states[num_train + num_val:].shape)
