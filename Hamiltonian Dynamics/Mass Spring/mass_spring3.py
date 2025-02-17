@@ -141,7 +141,7 @@ if __name__ == '__main__':
 
     # Dataset parameters
     print("=> Generating datasets....")
-    for dataset, class_id in zip(["mass_spring_2g", "mass_spring_3g", "mass_spring_4g"], [0, 1, 2]):
+    for dataset, class_id in zip(["mass_spring_1k", "mass_spring_2k", "mass_spring_3k"], [0, 1, 2]):
         num_steps = 30
         dt = 0.1
         steps_per_dt = 1

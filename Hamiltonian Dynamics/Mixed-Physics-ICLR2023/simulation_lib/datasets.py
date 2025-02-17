@@ -239,145 +239,95 @@ def generate_full_dataset(
 
 
 """  """
-PENDULUM_2G = (
-    ideal_pendulum.IdealPendulum,
-    lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(0.5, 1.0),
-        g_range=utils.BoxRegion(2.0, 2.0),
-        l_range=utils.BoxRegion(0.5, 1.0),
-        radius_range=utils.BoxRegion(1.3, 2.3),
-        num_colors=1,
-    )
-)
-
-PENDULUM_3G = (
-    ideal_pendulum.IdealPendulum,
-    lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(0.5, 1.0),
-        g_range=utils.BoxRegion(3.0, 3.0),
-        l_range=utils.BoxRegion(0.5, 1.0),
-        radius_range=utils.BoxRegion(1.3, 2.3),
-        num_colors=1,
-    )
-)
-
-PENDULUM_4G = (
-    ideal_pendulum.IdealPendulum,
-    lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(0.5, 1.0),
-        g_range=utils.BoxRegion(4.0, 4.0),
-        l_range=utils.BoxRegion(0.5, 1.0),
-        radius_range=utils.BoxRegion(1.3, 2.3),
-        num_colors=1,
-    )
-)
-
-
-DOUBLE_PENDULUM_2G = (
-    ideal_double_pendulum.IdealDoublePendulum,
-    lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(5, 8),
-        g_range=utils.BoxRegion(2.0, 2.0),
-        l_range=utils.BoxRegion(2.5, 3.0),
-        radius_range=utils.BoxRegion(1.5, 2.5),
-        num_colors=1
-    )
-)
-
-DOUBLE_PENDULUM_3G = (
-    ideal_double_pendulum.IdealDoublePendulum,
-    lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(5, 8),
-        g_range=utils.BoxRegion(3.0, 3.0),
-        l_range=utils.BoxRegion(2.5, 3.0),
-        radius_range=utils.BoxRegion(1.5, 2.5),
-        num_colors=1
-    ),
-)
-
-DOUBLE_PENDULUM_4G = (
-    ideal_double_pendulum.IdealDoublePendulum,
-    lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(5, 8),
-        g_range=utils.BoxRegion(4.0, 4.0),
-        l_range=utils.BoxRegion(2.5, 3.0),
-        radius_range=utils.BoxRegion(1.5, 2.5),
-        num_colors=1
-    ),
-)
-
-TWO_BODY_1G = (
-    n_body.TwoBodySystem,
-    lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(1.0, 1.0),
-        g_range=utils.BoxRegion(1.0, 1.0),
-        radius_range=utils.BoxRegion(0.5, 1.5),
-        provided_canvas_bounds=utils.BoxRegion(-2.75, 2.75),
-        randomize_canvas_location=False,
-        num_colors=1,
-    )
-)
-
-TWO_BODY_2G = (
-    n_body.TwoBodySystem,
-    lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(1.0, 1.0),
-        g_range=utils.BoxRegion(2.0, 2.0),
-        radius_range=utils.BoxRegion(0.5, 1.5),
-        provided_canvas_bounds=utils.BoxRegion(-2.75, 2.75),
-        randomize_canvas_location=False,
-        num_colors=1,
-    )
-)
-
-TWO_BODY_3G = (
-    n_body.TwoBodySystem,
-    lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(1.0, 1.0),
-        g_range=utils.BoxRegion(3.0, 3.0),
-        radius_range=utils.BoxRegion(0.5, 1.5),
-        provided_canvas_bounds=utils.BoxRegion(-2.75, 2.75),
-        randomize_canvas_location=False,
-        num_colors=1,
-    )
-)
-
-MASS_SPRING_1K = (
-    ideal_mass_spring.IdealMassSpring,
-    lambda: dict(  #  pylint:disable=g-long-lambda
-        k_range=utils.BoxRegion(1.0, 1.0),
-        m_range=utils.BoxRegion(0.4, 1.0),
-        radius_range=utils.BoxRegion(0.1, 1.0),
-        uniform_annulus=False,
-        randomize_canvas_location=True,
-        randomize_x=True,
-        num_colors=1,
-    )
-)
-
-MASS_SPRING_2K = (
+MASS_SPRING_00 = (
     ideal_mass_spring.IdealMassSpring,
     lambda: dict(  #  pylint:disable=g-long-lambda
         k_range=utils.BoxRegion(2.0, 2.0),
-        m_range=utils.BoxRegion(0.4, 1.0),
+        m_range=utils.BoxRegion(0.5, 0.5),
         radius_range=utils.BoxRegion(0.1, 1.0),
-        uniform_annulus=False,
-        randomize_canvas_location=True,
-        randomize_x=True,
         num_colors=1,
+        friction=0.00,
+    ),
+)
+
+MASS_SPRING_05 = (
+    ideal_mass_spring.IdealMassSpring,
+    lambda: dict(  #  pylint:disable=g-long-lambda
+        k_range=utils.BoxRegion(2.0, 2.0),
+        m_range=utils.BoxRegion(0.5, 0.5),
+        radius_range=utils.BoxRegion(0.1, 1.0),
+        num_colors=1,
+        friction=0.05,
+    ),
+)
+
+MASS_SPRING_10 = (
+    ideal_mass_spring.IdealMassSpring,
+    lambda: dict(  #  pylint:disable=g-long-lambda
+        k_range=utils.BoxRegion(2.0, 2.0),
+        m_range=utils.BoxRegion(0.5, 0.5),
+        radius_range=utils.BoxRegion(0.1, 1.0),
+        num_colors=1,
+        friction=0.10,
+    ),
+)
+
+MASS_SPRING_15 = (
+    ideal_mass_spring.IdealMassSpring,
+    lambda: dict(  #  pylint:disable=g-long-lambda
+        k_range=utils.BoxRegion(2.0, 2.0),
+        m_range=utils.BoxRegion(0.5, 0.5),
+        radius_range=utils.BoxRegion(0.1, 1.0),
+        num_colors=1,
+        friction=0.15,
+    ),
+)
+
+PENDULUM_00 = (
+    ideal_pendulum.IdealPendulum,
+    lambda: dict(  #  pylint:disable=g-long-lambda
+        m_range=utils.BoxRegion(0.5, 0.5),
+        g_range=utils.BoxRegion(3.0, 3.0),
+        l_range=utils.BoxRegion(.5, 1.0),
+        radius_range=utils.BoxRegion(1.3, 2.3),
+        num_colors=1,
+        friction=0.00,
     )
 )
 
-MASS_SPRING_3K = (
-    ideal_mass_spring.IdealMassSpring,
+PENDULUM_05 = (
+    ideal_pendulum.IdealPendulum,
     lambda: dict(  #  pylint:disable=g-long-lambda
-        k_range=utils.BoxRegion(3.0, 3.0),
-        m_range=utils.BoxRegion(0.4, 1.0),
-        radius_range=utils.BoxRegion(0.1, 1.0),
-        uniform_annulus=False,
-        randomize_canvas_location=True,
-        randomize_x=True,
+        m_range=utils.BoxRegion(0.5, 0.5),
+        g_range=utils.BoxRegion(3.0, 3.0),
+        l_range=utils.BoxRegion(.5, 1.0),
+        radius_range=utils.BoxRegion(1.3, 2.3),
         num_colors=1,
+        friction=0.05,
+    )
+)
+
+PENDULUM_10 = (
+    ideal_pendulum.IdealPendulum,
+    lambda: dict(  #  pylint:disable=g-long-lambda
+        m_range=utils.BoxRegion(0.5, 0.5),
+        g_range=utils.BoxRegion(3.0, 3.0),
+        l_range=utils.BoxRegion(.5, 1.0),
+        radius_range=utils.BoxRegion(1.3, 2.3),
+        num_colors=1,
+        friction=0.10,
+    )
+)
+
+PENDULUM_15 = (
+    ideal_pendulum.IdealPendulum,
+    lambda: dict(  #  pylint:disable=g-long-lambda
+        m_range=utils.BoxRegion(0.5, 0.5),
+        g_range=utils.BoxRegion(3.0, 3.0),
+        l_range=utils.BoxRegion(.5, 1.0),
+        radius_range=utils.BoxRegion(1.3, 2.3),
+        num_colors=1,
+        friction=0.15,
     )
 )
 
@@ -462,9 +412,9 @@ PENDULUM_COLORS_FRICTION = (
 DOUBLE_PENDULUM = (
     ideal_double_pendulum.IdealDoublePendulum,
     lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(0.4, 0.6),
+        m_range=utils.BoxRegion(0.5, 0.5),
         g_range=utils.BoxRegion(3.0, 3.0),
-        l_range=utils.BoxRegion(0.75, 1.0),
+        l_range=utils.BoxRegion(1.0, 1.0),
         radius_range=utils.BoxRegion(1.3, 2.3),
         uniform_annulus=False,
         randomize_canvas_location=False,
@@ -501,10 +451,10 @@ DOUBLE_PENDULUM_COLORS_FRICTION = (
 TWO_BODY = (
     n_body.TwoBodySystem,
     lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(1.0, 1.0),
+        m_range=utils.BoxRegion(0.5, 1.5),
         g_range=utils.BoxRegion(1.0, 1.0),
         radius_range=utils.BoxRegion(0.5, 1.5),
-        provided_canvas_bounds=utils.BoxRegion(-2.75, 2.75),
+        provided_canvas_bounds=utils.BoxRegion(-5.0, 5.0),
         randomize_canvas_location=False,
         num_colors=2,
     )

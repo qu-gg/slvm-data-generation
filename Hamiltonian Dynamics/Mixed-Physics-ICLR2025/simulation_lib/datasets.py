@@ -276,11 +276,11 @@ PENDULUM_4G = (
 DOUBLE_PENDULUM_2G = (
     ideal_double_pendulum.IdealDoublePendulum,
     lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(5, 8),
+        m_range=utils.BoxRegion(2, 2),
         g_range=utils.BoxRegion(2.0, 2.0),
-        l_range=utils.BoxRegion(2.5, 3.0),
-        radius_range=utils.BoxRegion(1.5, 2.5),
-        num_colors=1
+        l_range=utils.BoxRegion(1.25, 1.25),
+        radius_range=utils.BoxRegion(0.2, 2.3),
+        num_colors=1,
     )
 )
 
@@ -462,9 +462,9 @@ PENDULUM_COLORS_FRICTION = (
 DOUBLE_PENDULUM = (
     ideal_double_pendulum.IdealDoublePendulum,
     lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(0.4, 0.6),
+        m_range=utils.BoxRegion(0.5, 0.5),
         g_range=utils.BoxRegion(3.0, 3.0),
-        l_range=utils.BoxRegion(0.75, 1.0),
+        l_range=utils.BoxRegion(1.0, 1.0),
         radius_range=utils.BoxRegion(1.3, 2.3),
         uniform_annulus=False,
         randomize_canvas_location=False,
@@ -501,10 +501,10 @@ DOUBLE_PENDULUM_COLORS_FRICTION = (
 TWO_BODY = (
     n_body.TwoBodySystem,
     lambda: dict(  #  pylint:disable=g-long-lambda
-        m_range=utils.BoxRegion(1.0, 1.0),
+        m_range=utils.BoxRegion(0.5, 1.5),
         g_range=utils.BoxRegion(1.0, 1.0),
         radius_range=utils.BoxRegion(0.5, 1.5),
-        provided_canvas_bounds=utils.BoxRegion(-2.75, 2.75),
+        provided_canvas_bounds=utils.BoxRegion(-5.0, 5.0),
         randomize_canvas_location=False,
         num_colors=2,
     )

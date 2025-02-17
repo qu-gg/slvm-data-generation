@@ -141,7 +141,7 @@ if __name__ == '__main__':
 
     # Dataset parameters
     print("=> Generating datasets....")
-    for dataset, class_id in zip(["two_body_2g", "two_body_3g", "two_body_4g"], [0, 1, 2]):
+    for dataset, class_id in zip(["two_body_1g", "two_body_2g", "two_body_3g"], [0, 1, 2]):
         num_steps = 30
         dt = 0.1
         steps_per_dt = 1
